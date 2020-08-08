@@ -12,7 +12,7 @@ import java.nio.file.Files;
 import java.util.logging.Logger;
 
 public class Plugin extends net.md_5.bungee.api.plugin.Plugin {
-    static net.md_5.bungee.api.plugin.Plugin instance;
+    static Plugin instance;
     static Configuration config;
     static Logger logger;
 
@@ -34,7 +34,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin {
         getProxy().getPluginManager().registerListener(this, new SetSlots());
     }
 
-    private boolean loadConfig() {
+    public boolean loadConfig() {
         try {
             if (!getDataFolder().exists())
                 getDataFolder().mkdir();
