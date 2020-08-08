@@ -34,3 +34,6 @@ permissions:
       gatekeeper.about:
         description: View Gatekeeper info
         default: op
+      gatekeeper.setslots:
+        description: Change server slots
+        default: op

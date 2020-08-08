@@ -9,16 +9,19 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.logging.Logger;
 
 public class Plugin extends net.md_5.bungee.api.plugin.Plugin {
     static net.md_5.bungee.api.plugin.Plugin instance;
     static Configuration config;
+    static Logger logger;
 
     public static Platform platform = Platform.BUNGEE;
 
     @Override
     public void onEnable() {
         instance = this;
+        logger = getLogger();
 
         boolean loadError = loadConfig();
         if (loadError) {
@@ -28,6 +31,7 @@ public class Plugin extends net.md_5.bungee.api.plugin.Plugin {
 
         getProxy().getPluginManager().registerCommand(this, new BaseCommand());
         getProxy().getPluginManager().registerListener(this, new Events());
+        getProxy().getPluginManager().registerListener(this, new SetSlots());
     }
 
     private boolean loadConfig() {
