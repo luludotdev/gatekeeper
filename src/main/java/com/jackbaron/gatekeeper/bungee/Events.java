@@ -4,7 +4,6 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.PostLoginEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.config.Configuration;
@@ -30,7 +29,6 @@ public class Events implements Listener {
         }
 
         int newMax = maxPlayers - reservedSlots;
-        boolean hasBypass = player.hasPermission("gatekeeper.bypass");
         boolean canUseReserved = player.hasPermission("gatekeeper.usereserved");
 
         if (playerCount >= newMax && !canUseReserved) {
@@ -39,13 +37,5 @@ public class Events implements Listener {
 
             player.disconnect(new TextComponent(kickMessage));
         }
-
-//        if (event.getResult() == PlayerLoginEvent.Result.KICK_FULL && hasBypass) {
-//            event.allow();
-//        }
-//
-//        int maxPlayers = Plugin.instance.getProxy().getConfig().getPlayerLimit();
-//        Plugin.instance.getLogger().info("Max Players: " + maxPlayers);
-//        player.disconnect("fuck");
     }
 }
