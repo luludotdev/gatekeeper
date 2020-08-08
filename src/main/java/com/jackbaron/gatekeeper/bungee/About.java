@@ -17,6 +17,8 @@ public class About extends Command {
         if (!sender.hasPermission("gatekeeper.about")) {
             TextComponent msg = new TextComponent(Constants.getErrorPrefix(Plugin.platform) + "You do not have permission to do that!");
             sender.sendMessage(msg);
+
+            return;
         }
 
         PluginDescription desc = Plugin.instance.getDescription();
