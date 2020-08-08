@@ -1,0 +1,36 @@
+name: Gatekeeper
+version: '0.1.0'
+
+main: com.jackbaron.gatekeeper.bukkit.Plugin
+
+author: lolPants
+website: https://github.com/lolPants
+
+commands:
+  gatekeeper:
+    description: Gatekeeper main command [SPIGOT]
+    aliases:
+      - gk
+
+permissions:
+  gatekeeper.*:
+    description: Gives access to all Gatekeeper commands
+    children:
+      gatekeeper.reload.*:
+        children:
+          gatekeeper.reload.server:
+            description: Permission to reload Gatekeeper at the server level
+            default: op
+
+          gatekeeper.reload.proxy:
+            description: Permission to reload Gatekeeper at the proxy level
+            default: op
+      gatekeeper.usereserved:
+        description: Allow use of reserved slots
+        default: op
+      gatekeeper.bypass:
+        description: Ignore slot limits
+        default: op
+      gatekeeper.about:
+        description: View Gatekeeper info
+        default: op

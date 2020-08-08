@@ -1,0 +1,8 @@
+# Enable Gatekeeper
+enabled: true
+
+# Number of slots to reserve
+reserved: 0
+
+# Kick message when a user tries to join reserved slots
+kickMessage: '&oServer is full!'

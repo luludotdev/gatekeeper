@@ -1,0 +1,8 @@
+# Enable Gatekeeper
+enabled: false
+
+# Number of slots to reserve
+reserved: 0
+
+# Kick message when a user tries to join reserved slots
+kickMessage: '&oNetwork is full!'
