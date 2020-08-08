@@ -23,10 +23,13 @@ public class Events implements Listener {
         ProxyServer server = Plugin.instance.getProxy();
         ProxiedPlayer player = event.getPlayer();
 
-        int playerCount = server.getOnlineCount();
+        int playerCount = server.getOnlineCount() - 1;
         int maxPlayers = server.getConfig().getPlayerLimit();
-        int newMax = maxPlayers - reservedSlots;
+        if (maxPlayers == -1) {
+            return;
+        }
 
+        int newMax = maxPlayers - reservedSlots;
         boolean hasBypass = player.hasPermission("gatekeeper.bypass");
         boolean canUseReserved = player.hasPermission("gatekeeper.usereserved");
 
