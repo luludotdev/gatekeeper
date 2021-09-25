@@ -17,7 +17,7 @@ public class SlotManager {
     private static Field maxPlayersField;
 
     public static void SetSlots(final @NotNull Platform platform, final int slots) throws ReflectiveOperationException {
-        if (platform.equals(Platform.SPIGOT)) {
+        if (platform.equals(Platform.PAPER)) {
             setSlotsPaper(slots);
         } else if (platform.equals(Platform.BUNGEE)) {
             setSlotsBungee(slots);
