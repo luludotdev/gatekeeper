@@ -1,6 +1,7 @@
 package com.jackbaron.gatekeeper.bukkit;
 
 import com.jackbaron.gatekeeper.common.Constants;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,8 @@ import java.util.logging.Level;
 import static org.bukkit.Bukkit.getServer;
 
 public class SetSlots implements CommandExecutor, Listener {
+    private Field maxPlayersField;
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String name, @NotNull String[] args) {
         if (!sender.hasPermission("gatekeeper.setslots")) {
@@ -51,13 +54,38 @@ public class SetSlots implements CommandExecutor, Listener {
     }
 
     private void changeSlots(int slots) throws ReflectiveOperationException {
-        Method serverGetHandle = Plugin.instance.getServer().getClass().getDeclaredMethod("getHandle");
-
+        Method serverGetHandle = getServer().getClass().getDeclaredMethod("getHandle");
         Object playerList = serverGetHandle.invoke(getServer());
-        Field maxPlayersField = playerList.getClass().getSuperclass().getDeclaredField("maxPlayers");
 
-        maxPlayersField.setAccessible(true);
-        maxPlayersField.set(playerList, slots);
+        if (this.maxPlayersField == null) {
+            this.maxPlayersField = getMaxPlayersField(playerList);
+        }
+
+        this.maxPlayersField.setInt(playerList, slots);
+    }
+
+    private Field getMaxPlayersField(Object playerList) throws ReflectiveOperationException {
+        Class<?> playerListClass = playerList.getClass().getSuperclass();
+
+        try {
+            Field field = playerListClass.getDeclaredField("maxPlayers");
+            field.setAccessible(true);
+            return field;
+        } catch (NoSuchFieldException e) {
+            for (Field field : playerListClass.getDeclaredFields()) {
+                if (field.getType() != int.class) {
+                    continue;
+                }
+
+                field.setAccessible(true);
+
+                if (field.getInt(playerList) == Bukkit.getMaxPlayers()) {
+                    return field;
+                }
+            }
+
+            throw new NoSuchFieldException("Unable to find maxPlayers field in " + playerListClass.getName());
+        }
     }
 
     private void saveSlots() {
