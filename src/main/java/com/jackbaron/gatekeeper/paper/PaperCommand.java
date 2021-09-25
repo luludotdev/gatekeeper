@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.jackbaron.gatekeeper.paper.PaperPlugin.LOGGER;
 
-@CommandAlias("gatekeeperbungee")
+@CommandAlias("gatekeeper")
 public final class PaperCommand extends BaseCommand {
     @Default
     @CommandPermission("gatekeeper.about")

@@ -1,7 +1,7 @@
 name: Gatekeeper
 version: '${project.version}'
 
-main: com.jackbaron.gatekeeper.bungee.Plugin
+main: com.jackbaron.gatekeeper.bungee.BungeePlugin
 
 author: lolPants
 website: https://github.com/lolPants

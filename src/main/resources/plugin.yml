@@ -1,7 +1,8 @@
 name: Gatekeeper
 version: '${project.version}'
 
-main: com.jackbaron.gatekeeper.bukkit.Plugin
+main: com.jackbaron.gatekeeper.paper.PaperPlugin
+api-version: '1.13'
 
 author: lolPants
 website: https://github.com/lolPants
