@@ -1,5 +1,5 @@
 name: Gatekeeper
-version: '0.2.0'
+version: '${project.version}'
 
 main: com.jackbaron.gatekeeper.bukkit.Plugin
 
@@ -9,8 +9,6 @@ website: https://github.com/lolPants
 commands:
   gatekeeper:
     description: Gatekeeper main command [SPIGOT]
-    aliases:
-      - gk
 
 permissions:
   gatekeeper.*:

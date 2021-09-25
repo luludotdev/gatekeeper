@@ -1,5 +1,5 @@
 name: Gatekeeper
-version: '0.2.0'
+version: '${project.version}'
 
 main: com.jackbaron.gatekeeper.bungee.Plugin
 
